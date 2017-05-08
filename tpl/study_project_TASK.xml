@@ -1,0 +1,49 @@
+                    <Task>
+                      <option name="activeSubtaskIndex" value="1" />
+                      <option name="adaptiveTaskParameters">
+                        <AdaptiveTaskParameters>
+                          <option name="choiceVariants">
+                            <list />
+                          </option>
+                          <option name="multipleChoice" value="false" />
+                          <option name="selectedVariants">
+                            <list />
+                          </option>
+                          <option name="theoryTask" value="false" />
+                        </AdaptiveTaskParameters>
+                      </option>
+                      <option name="index" value="2" />    <!--TaskNr-->
+                      <option name="lastSubtaskIndex" value="1" /> 
+                      <option name="name" value="Number, string" />  <!--TaskName-->
+                      <option name="status" value="Unchecked" />
+                      <option name="stepId" value="0" />   <!--TaskStepID-->
+                      <option name="text" />
+                      <option name="theoryTask" value="false" />
+                      <option name="updateDate" />
+                      <option name="taskFiles">
+                        <map>
+                          <entry key="task.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list>
+                                      
+                                      
+<!--#PLACEHOLDERS-->
+                                                                    
+                                    
+                                  </list>
+                                </option>
+                                <option name="highlightErrors" value="true" />
+                                <option name="index" value="1" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="task.py" />
+                                <option name="text" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                        </map>
+                      </option>
+                    </Task>
