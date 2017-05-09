@@ -1,5 +1,5 @@
 from test_helper import run_common_tests, failed, passed, get_answer_placeholders
-from test_helper import check_placeholder
+from test_helper_4automation import check_placeholder
 
 #### task: $name
 def test_answer_placeholders():

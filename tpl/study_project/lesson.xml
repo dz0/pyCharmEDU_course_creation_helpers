@@ -1,7 +1,7 @@
               <Lesson>
                 <option name="id" value="45761" />   <!--LessonID-->
-                <option name="index" value="1" />   <!--LessonNr-->
-                <option name="name" value="(Non)Empty value check" />  <!--LessonName-->
+                <option name="index" value="$nr" />   <!--LessonNr-->
+                <option name="name" value="$name" />  <!--LessonName-->
                 <option name="updateDate" />
                 <option name="taskList">
                   <list>

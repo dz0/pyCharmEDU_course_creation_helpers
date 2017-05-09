@@ -12,11 +12,11 @@
                           <option name="theoryTask" value="false" />
                         </AdaptiveTaskParameters>
                       </option>
-                      <option name="index" value="2" />    <!--TaskNr-->
+                      <option name="index" value="$nr" />    <!--TaskNr-->
                       <option name="lastSubtaskIndex" value="1" /> 
-                      <option name="name" value="Number, string" />  <!--TaskName-->
+                      <option name="name" value="$name" />  <!--TaskName-->
                       <option name="status" value="Unchecked" />
-                      <option name="stepId" value="0" />   <!--TaskStepID-->
+                      <!-- <option name="stepId" value="0" /> -->  <!--TaskStepID-->
                       <option name="text" />
                       <option name="theoryTask" value="false" />
                       <option name="updateDate" />
@@ -41,7 +41,7 @@ $rendered_children
                                 <option name="trackLengths" value="true" />
                                 <option name="userCreated" value="false" />
                                 <option name="name" value="task.py" />
-                                <option name="text" />
+                                <option name="text" _value="$code_html_escaped"/>
                               </TaskFile>
                             </value>
                           </entry>

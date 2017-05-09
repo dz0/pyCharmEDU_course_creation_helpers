@@ -17,10 +17,10 @@
               </StepicUser>
             </list>
           </option>
-          <option name="courseDirectory" value="$APPLICATION_CONFIG_DIR$/courses/Python idioms" />  <!--CourseName-->
+          <option name="courseDirectory" value="$APPLICATION_CONFIG_DIR$/courses/$name" />  <!--CourseName-->
           <option name="courseMode" value="Course Creator" />
           <option name="courseType" value="PyCharm" />
-          <option name="description" value="Best ways to express oneself in Python" />  <!--CourseDescription-->
+          <option name="description" value="$description" />  <!--CourseDescription-->
           <option name="id" value="2759" />      <!--CourseID-->
           <option name="language" value="Python" />
           <option name="lessons">
@@ -33,7 +33,7 @@ $rendered_children
               
             </list>
           </option>
-          <option name="name" value="Python idioms" />   <!--CourseName-->
+          <option name="name" value="$name" />   <!--CourseName-->
           <option name="updateDate" />
         </Course>
       </option>
