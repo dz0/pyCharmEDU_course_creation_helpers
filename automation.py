@@ -1,6 +1,9 @@
+RESULT_ROOT = 'results'
+
 from string import Template
 import re
 import os
+
 
 
 #### PARSING ####
@@ -56,23 +59,22 @@ def placeholder(line):
 
 #### RENDERING ####
 
-def render( info ):
+def render_study_project( info ):
     if info['entity'] != 'placeholder':
-        rendered_children_list = map( render, info['children'] )
+        rendered_children_list = map( render_study_project, info['children'] )
         info['rendered_children'] = "\n".join( rendered_children_list )  # recursion
+
     tpl = Template( open(  os.path.join("tpl/study_project", info['entity']+'.xml' )).read() )  # todo: could be singleton
     result = tpl.safe_substitute( info )
-    return result
-    
 
-def out( info ):
-    result = render( info )
-    
-    out_root = '.'
-    if not os.path.exists(out_root):
-            os.makedirs(out_root)
-    with open( os.path.join( out_root, "study_project.xml"), 'w') as f:
-        f.write( result )
+    if info['entity'] == 'course':
+        if not os.path.exists(RESULT_ROOT):
+            os.makedirs(RESULT_ROOT)
+            
+        with open( os.path.join( RESULT_ROOT, "study_project.xml"), 'w') as f:
+            f.write( result )
+
+    return result
                 
         
 def init_placeholders_DEPRECATED():
@@ -118,12 +120,25 @@ def init_placeholders_DEPRECATED():
     with open("result.py", 'w') as f:
         f.writelines( [intro] + results )
 
+def render_course_tree( info ):
+    # for course in info:
+        course = info
+        for lnr, lesson in enumerate( course['children'] ):
+            print (lnr)
+            for tnr, task in enumerate ( lesson['children'] ):
+                # make_test_file(path=path, human_nr=nr+1, name=name, expected=expected, extra_args="")
+                print("  ", tnr )
+                for phnr, placeholder in enumerate( task['children'] ):
+                    print("    ", phnr)
+                    print ( ' -> '.join( map(str,   [ lesson.get('name'), task.get('name'), placeholder.get('name') ] ))) 
+                    
+
 def make_test_file(path, **task):
     test_tpl = Template(open("tpl/tests.py").read())
     
     test_code = test_tpl.substitute( task )
                 
-    with open( os.path.join( path, "tests.py"), 'w') as f:
+    with open( os.path.join( RESULT_ROOT, path, "tests.py"), 'w') as f:
         f.write(test_code)
                 
     
@@ -134,5 +149,8 @@ if __name__ == "__main__":
     from pprint import pprint
     pprint( info )
     
-    out( info )
-    # init_placeholders()
+    render_course_tree( info )
+    render_study_project( info )
+
+    print("OK")
+    
