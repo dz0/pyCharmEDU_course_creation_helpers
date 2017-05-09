@@ -1,0 +1,31 @@
+                                    <AnswerPlaceholder>
+                                      <option name="index" value="0" />
+                                      <option name="initialState" />
+                                      <option name="length" value="26" />  <!--length-->
+                                      <option name="offset" value="148" />  <!--offset-->
+                                      <option name="selected" value="false" />
+                                      <option name="subtaskInfos">
+                                        <map>
+                                          <entry key="0">  <!--nr-->
+                                            <value>
+                                              <AnswerPlaceholderSubtaskInfo>
+                                                <option name="answer" value="" />
+                                                <option name="hasFrame" value="true" />
+                                                <option name="hints">
+                                                  <list>  <!--Hints-->
+                                                    <option value="Make it simpler" />
+                                                  </list>
+                                                </option>
+                                                <option name="needInsertText" value="false" />
+                                                <option name="placeholderText" value="name == &quot;&quot; or name is None" />  <!--text-->
+                                                <option name="possibleAnswer" value="name in [&quot;&quot;, None]" />  <!--answer-->
+                                                <option name="selected" value="false" />
+                                                <option name="status" value="Failed" />
+                                              </AnswerPlaceholderSubtaskInfo>
+                                            </value>
+                                          </entry>
+                                        </map>
+                                      </option>
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                         

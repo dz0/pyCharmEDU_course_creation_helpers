@@ -1,0 +1,14 @@
+              <Lesson>
+                <option name="id" value="45761" />   <!--LessonID-->
+                <option name="index" value="1" />   <!--LessonNr-->
+                <option name="name" value="(Non)Empty value check" />  <!--LessonName-->
+                <option name="updateDate" />
+                <option name="taskList">
+                  <list>
+                      
+<!--#TASKS-->
+$rendered_children    
+    
+                  </list>
+                </option>
+              </Lesson>

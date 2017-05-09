@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="StudySettings">
+    <StudyTaskManager>
+      <option name="course">
+        <Course>
+          <option name="adaptive" value="false" />
+          <option name="authors">
+            <list>
+              <StepicUser>  <!--Stepic-->
+                <option name="accessToken" />
+                <option name="email" value="" />
+                <option name="firstName" value="jurgis" />
+                <option name="id" value="19216220" />
+                <option name="lastName" value="" />
+                <option name="refreshToken" />
+              </StepicUser>
+            </list>
+          </option>
+          <option name="courseDirectory" value="$APPLICATION_CONFIG_DIR$/courses/Python idioms" />  <!--CourseName-->
+          <option name="courseMode" value="Course Creator" />
+          <option name="courseType" value="PyCharm" />
+          <option name="description" value="Best ways to express oneself in Python" />  <!--CourseDescription-->
+          <option name="id" value="2759" />      <!--CourseID-->
+          <option name="language" value="Python" />
+          <option name="lessons">
+            <list>
+                
+                
+<!--#LESSONS-->
+              <Lesson>
+                <option name="id" value="45761" />   <!--LessonID-->
+                <option name="index" value="1" />   <!--LessonNr-->
+                <option name="name" value="(Non)Empty value check" />  <!--LessonName-->
+                <option name="updateDate" />
+                <option name="taskList">
+                  <list>
+                      
+<!--#TASKS-->
+                    <Task>
+                      <option name="activeSubtaskIndex" value="1" />
+                      <option name="adaptiveTaskParameters">
+                        <AdaptiveTaskParameters>
+                          <option name="choiceVariants">
+                            <list />
+                          </option>
+                          <option name="multipleChoice" value="false" />
+                          <option name="selectedVariants">
+                            <list />
+                          </option>
+                          <option name="theoryTask" value="false" />
+                        </AdaptiveTaskParameters>
+                      </option>
+                      <option name="index" value="2" />    <!--TaskNr-->
+                      <option name="lastSubtaskIndex" value="1" /> 
+                      <option name="name" value="Number, string" />  <!--TaskName-->
+                      <option name="status" value="Unchecked" />
+                      <option name="stepId" value="0" />   <!--TaskStepID-->
+                      <option name="text" />
+                      <option name="theoryTask" value="false" />
+                      <option name="updateDate" />
+                      <option name="taskFiles">
+                        <map>
+                          <entry key="task.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list>
+                                      
+                                      
+<!--#PLACEHOLDERS-->
+                                    <AnswerPlaceholder>
+                                      <option name="index" value="0" />
+                                      <option name="initialState" />
+                                      <option name="length" value="26" />  <!--length-->
+                                      <option name="offset" value="148" />  <!--offset-->
+                                      <option name="selected" value="false" />
+                                      <option name="subtaskInfos">
+                                        <map>
+                                          <entry key="0">  <!--nr-->
+                                            <value>
+                                              <AnswerPlaceholderSubtaskInfo>
+                                                <option name="answer" value="" />
+                                                <option name="hasFrame" value="true" />
+                                                <option name="hints">
+                                                  <list>  <!--Hints-->
+                                                    <option value="Make it simpler" />
+                                                  </list>
+                                                </option>
+                                                <option name="needInsertText" value="false" />
+                                                <option name="placeholderText" value="name == &quot;&quot; or name is None" />  <!--text-->
+                                                <option name="possibleAnswer" value="name in [&quot;&quot;, None]" />  <!--answer-->
+                                                <option name="selected" value="false" />
+                                                <option name="status" value="Failed" />
+                                              </AnswerPlaceholderSubtaskInfo>
+                                            </value>
+                                          </entry>
+                                        </map>
+                                      </option>
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                         
+    
+                                                                    
+                                    
+                                  </list>
+                                </option>
+                                <option name="highlightErrors" value="true" />
+                                <option name="index" value="1" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="task.py" />
+                                <option name="text" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                        </map>
+                      </option>
+                    </Task>
+
+                    <Task>
+                      <option name="activeSubtaskIndex" value="1" />
+                      <option name="adaptiveTaskParameters">
+                        <AdaptiveTaskParameters>
+                          <option name="choiceVariants">
+                            <list />
+                          </option>
+                          <option name="multipleChoice" value="false" />
+                          <option name="selectedVariants">
+                            <list />
+                          </option>
+                          <option name="theoryTask" value="false" />
+                        </AdaptiveTaskParameters>
+                      </option>
+                      <option name="index" value="2" />    <!--TaskNr-->
+                      <option name="lastSubtaskIndex" value="1" /> 
+                      <option name="name" value="Number, string" />  <!--TaskName-->
+                      <option name="status" value="Unchecked" />
+                      <option name="stepId" value="0" />   <!--TaskStepID-->
+                      <option name="text" />
+                      <option name="theoryTask" value="false" />
+                      <option name="updateDate" />
+                      <option name="taskFiles">
+                        <map>
+                          <entry key="task.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list>
+                                      
+                                      
+<!--#PLACEHOLDERS-->
+                                    <AnswerPlaceholder>
+                                      <option name="index" value="0" />
+                                      <option name="initialState" />
+                                      <option name="length" value="26" />  <!--length-->
+                                      <option name="offset" value="148" />  <!--offset-->
+                                      <option name="selected" value="false" />
+                                      <option name="subtaskInfos">
+                                        <map>
+                                          <entry key="0">  <!--nr-->
+                                            <value>
+                                              <AnswerPlaceholderSubtaskInfo>
+                                                <option name="answer" value="" />
+                                                <option name="hasFrame" value="true" />
+                                                <option name="hints">
+                                                  <list>  <!--Hints-->
+                                                    <option value="Make it simpler" />
+                                                  </list>
+                                                </option>
+                                                <option name="needInsertText" value="false" />
+                                                <option name="placeholderText" value="name == &quot;&quot; or name is None" />  <!--text-->
+                                                <option name="possibleAnswer" value="name in [&quot;&quot;, None]" />  <!--answer-->
+                                                <option name="selected" value="false" />
+                                                <option name="status" value="Failed" />
+                                              </AnswerPlaceholderSubtaskInfo>
+                                            </value>
+                                          </entry>
+                                        </map>
+                                      </option>
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                         
+    
+                                                                    
+                                    
+                                  </list>
+                                </option>
+                                <option name="highlightErrors" value="true" />
+                                <option name="index" value="1" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="task.py" />
+                                <option name="text" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                        </map>
+                      </option>
+                    </Task>
+
+                    <Task>
+                      <option name="activeSubtaskIndex" value="1" />
+                      <option name="adaptiveTaskParameters">
+                        <AdaptiveTaskParameters>
+                          <option name="choiceVariants">
+                            <list />
+                          </option>
+                          <option name="multipleChoice" value="false" />
+                          <option name="selectedVariants">
+                            <list />
+                          </option>
+                          <option name="theoryTask" value="false" />
+                        </AdaptiveTaskParameters>
+                      </option>
+                      <option name="index" value="2" />    <!--TaskNr-->
+                      <option name="lastSubtaskIndex" value="1" /> 
+                      <option name="name" value="Number, string" />  <!--TaskName-->
+                      <option name="status" value="Unchecked" />
+                      <option name="stepId" value="0" />   <!--TaskStepID-->
+                      <option name="text" />
+                      <option name="theoryTask" value="false" />
+                      <option name="updateDate" />
+                      <option name="taskFiles">
+                        <map>
+                          <entry key="task.py">
+                            <value>
+                              <TaskFile>
+                                <option name="answerPlaceholders">
+                                  <list>
+                                      
+                                      
+<!--#PLACEHOLDERS-->
+                                    <AnswerPlaceholder>
+                                      <option name="index" value="0" />
+                                      <option name="initialState" />
+                                      <option name="length" value="26" />  <!--length-->
+                                      <option name="offset" value="148" />  <!--offset-->
+                                      <option name="selected" value="false" />
+                                      <option name="subtaskInfos">
+                                        <map>
+                                          <entry key="0">  <!--nr-->
+                                            <value>
+                                              <AnswerPlaceholderSubtaskInfo>
+                                                <option name="answer" value="" />
+                                                <option name="hasFrame" value="true" />
+                                                <option name="hints">
+                                                  <list>  <!--Hints-->
+                                                    <option value="Make it simpler" />
+                                                  </list>
+                                                </option>
+                                                <option name="needInsertText" value="false" />
+                                                <option name="placeholderText" value="name == &quot;&quot; or name is None" />  <!--text-->
+                                                <option name="possibleAnswer" value="name in [&quot;&quot;, None]" />  <!--answer-->
+                                                <option name="selected" value="false" />
+                                                <option name="status" value="Failed" />
+                                              </AnswerPlaceholderSubtaskInfo>
+                                            </value>
+                                          </entry>
+                                        </map>
+                                      </option>
+                                      <option name="useLength" value="false" />
+                                    </AnswerPlaceholder>
+                         
+    
+                                                                    
+                                    
+                                  </list>
+                                </option>
+                                <option name="highlightErrors" value="true" />
+                                <option name="index" value="1" />
+                                <option name="trackChanges" value="true" />
+                                <option name="trackLengths" value="true" />
+                                <option name="userCreated" value="false" />
+                                <option name="name" value="task.py" />
+                                <option name="text" />
+                              </TaskFile>
+                            </value>
+                          </entry>
+                        </map>
+                      </option>
+                    </Task>
+    
+    
+                  </list>
+                </option>
+              </Lesson>
+    
+              
+              
+            </list>
+          </option>
+          <option name="name" value="Python idioms" />   <!--CourseName-->
+          <option name="updateDate" />
+        </Course>
+      </option>
+      <option name="enableTestingFromSamples" value="true" />
+      <option name="toolWindowMode" value="TEXT" />
+      <option name="turnEditingMode" value="false" />
+      <option name="VERSION" value="4" />
+      <option name="myUserTests">
+        <map />
+      </option>
+      <option name="myInvisibleFiles">
+        <list />
+      </option>
+      <option name="myShouldUseJavaFx" value="true" />
+    </StudyTaskManager>
+  </component>
+</project>                      
