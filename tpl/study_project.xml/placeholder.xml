@@ -17,7 +17,7 @@
                                                   </list>
                                                 </option>
                                                 <option name="needInsertText" value="false" />
-                                                <option name="placeholderText" value="$replaced" />  <!--text-->
+                                                <option name="placeholderText" value="$given" />  <!--text-->
                                                 <option name="possibleAnswer" value="$expected" />  <!--answer-->
                                                 <option name="selected" value="false" />
                                                 <option name="status" value="Failed" />

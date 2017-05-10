@@ -1,5 +1,5 @@
                     <Task>
-                      <option name="activeSubtaskIndex" value="1" />
+                      <option name="activeSubtaskIndex" value="0" />
                       <option name="adaptiveTaskParameters">
                         <AdaptiveTaskParameters>
                           <option name="choiceVariants">
@@ -13,10 +13,10 @@
                         </AdaptiveTaskParameters>
                       </option>
                       <option name="index" value="$nr" />    <!--TaskNr-->
-                      <option name="lastSubtaskIndex" value="1" /> 
+                      <option name="lastSubtaskIndex" value="0" />
                       <option name="name" value="$name" />  <!--TaskName-->
                       <option name="status" value="Unchecked" />
-                      <!-- <option name="stepId" value="0" /> -->  <!--TaskStepID-->
+                       <option name="stepId" value="0" />   <!--TaskStepID-->
                       <option name="text" />
                       <option name="theoryTask" value="false" />
                       <option name="updateDate" />

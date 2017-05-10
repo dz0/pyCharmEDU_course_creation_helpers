@@ -1,5 +1,5 @@
               <Lesson>
-                <option name="id" value="45761" />   <!--LessonID-->
+                <option name="id" value="0" />   <!--LessonID-->
                 <option name="index" value="$nr" />   <!--LessonNr-->
                 <option name="name" value="$name" />  <!--LessonName-->
                 <option name="updateDate" />

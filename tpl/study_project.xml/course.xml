@@ -10,18 +10,18 @@
               <StepicUser>  <!--Stepic-->
                 <option name="accessToken" />
                 <option name="email" value="" />
-                <option name="firstName" value="jurgis" />
-                <option name="id" value="19216220" />
+                <option name="firstName" value="" />
+                <option name="id" value="-1" />
                 <option name="lastName" value="" />
                 <option name="refreshToken" />
               </StepicUser>
             </list>
           </option>
           <option name="courseDirectory" value="$APPLICATION_CONFIG_DIR$/courses/$name" />  <!--CourseName-->
-          <option name="courseMode" value="Course Creator" />
+          <option name="courseMode" value="$course_mode" /> <!-- CourseMode: Course Creator  or  Study-->
           <option name="courseType" value="PyCharm" />
           <option name="description" value="$description" />  <!--CourseDescription-->
-          <option name="id" value="2759" />      <!--CourseID-->
+          <option name="id" value="0" />      <!--CourseID-->
           <option name="language" value="Python" />
           <option name="lessons">
             <list>

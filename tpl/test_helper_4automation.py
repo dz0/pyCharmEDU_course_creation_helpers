@@ -99,7 +99,7 @@ def messages_by_fragments(placeholder, result=None, unnecessary=[], required=[])
 
     for item in unnecessary:
         if item in placeholder:
-            msgs .append( code_highlight(item) + " is not needed" )
+            msgs .append( "some " +code_highlight(item) + " is not needed" )
     msgs.append("")
     for item in required:
         if not item in placeholder:
