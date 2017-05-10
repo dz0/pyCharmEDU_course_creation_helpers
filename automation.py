@@ -26,7 +26,7 @@ def load_course( path, **kwargs ):
 
     def lesson(path):
         entity = 'lesson'
-        name = os.path.split( path )[-1]
+        name = os.path.split( path )[-1]   [:-len('.py')]
         name = name.replace("_", " ").title()
         code = open(path).read()
 
@@ -43,10 +43,17 @@ def load_course( path, **kwargs ):
 
         children = placeholders = []
         for nr, line in enumerate(lines):
+            if line.strip() == "###GROUP_LINES":
+                line = ""
+                while True:
+                    next = lines.pop(nr+1)
+                    if next.strip() == "###GROUP_LINES_END":
+                        break
+                    line += '\n'+ next
             p = placeholder( line )
             if p['match']:
                 placeholders.append( p )
-                lines[nr] = p['result_line']
+                lines[nr] = p['result_code']
                 p['line_nr'] = nr
 
         result_code = '\n'.join( lines )
@@ -56,15 +63,29 @@ def load_course( path, **kwargs ):
     # def subtask():
         # pass
 
-    def placeholder(line):
+    def placeholder(code):
+        """analyze code for placeholder directive"""
         entity = 'placeholder'
-        re_placeholder = re.compile(r"###PLACEHOLDER:(.*?)--\>(.+)")
+        re_placeholder = re.compile(r"###PLACEHOLDER:(.*?)--\>(.+)" , re.DOTALL)
 
-        match = re_placeholder.search(line)
+
+        directive_parts = []
+        clean_code = []
+        for line in code.split('\n'):
+           if '###' in line:
+               line, directive_part = line.split("###", 1)
+               directive_parts.append( directive_part.rstrip() )
+               clean_code.append( line.rstrip() )
+        directive = "###" + '\n'.join(directive_parts)
+        result_code = "\n".join(clean_code)
+
+
+        match = re_placeholder.search(directive)
+        # match = re_placeholder.search(code)
         if match:
             expected, given = match.group(1).strip(), match.group(2).strip()
-            result_line = re.sub(re_placeholder, "" , line)  # clear directive from code
-            offset_in_line = result_line.find( expected )
+            # result_code = re.sub(re_placeholder, "", result_code)  # clear directive from code
+            offset_in_line = result_code.find( expected )
             # result_line_OKanswered = result_line.replace( expected, given )
 
         return locals()
@@ -81,7 +102,7 @@ def escapeXMLText(text):
     text = text.replace("'", "&apos;")
     text = text.replace("<", "&lt;")
     text = text.replace(">", "&gt;")
-    # text = text.replace("\n", "&#10;")
+    text = text.replace("\n", "&#10;")
     return text
 
 def study_project_decorator(info):
@@ -138,11 +159,11 @@ def render_course_tree( info ):
                     placeholder['nr'] = phnr
                     placeholder['human_nr'] = phnr+1
 
-                    # TODO
-                    
-                    lines_before = task['lines'][:  placeholder['line_nr'] ] 
+                    # placeholder offset and length NEEDED for study_project.xml
+
+                    lines_before = task['lines'][:  placeholder['line_nr'] ]
                     lines_before.insert(0, lesson['intro'] )
-                    lines_before.append( placeholder['result_line'] [ : placeholder['offset_in_line'] ] ) 
+                    lines_before.append( placeholder['result_code'] [ : placeholder['offset_in_line'] ] )
                     content_before = "\n".join( lines_before )
                     placeholder['offset'] = len( content_before )
                     placeholder['length'] = len( placeholder['given'] )

@@ -1,12 +1,12 @@
                                     <AnswerPlaceholder>
-                                      <option name="index" value="0" />
+                                      <option name="index" value="$nr" />
                                       <option name="initialState" />
                                       <option name="length" value="$length" />  <!--length-->
                                       <option name="offset" value="$offset" />  <!--offset-->
                                       <option name="selected" value="false" />
                                       <option name="subtaskInfos">
                                         <map>
-                                          <entry key="$nr">  <!--nr-->
+                                          <entry key="0">  <!--subtask_nr-->
                                             <value>
                                               <AnswerPlaceholderSubtaskInfo>
                                                 <option name="answer" value="" />

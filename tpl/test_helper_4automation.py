@@ -32,7 +32,10 @@ def get_tokens(code, filter_spaces=True, group_by_parentheses_one_level=True):
                     tokens_some_grouped .append ( t )
 
                 if t in "])}" and start != None:
-                    tokens_some_grouped.append( ''.join(tokens[start:nr+1]).replace(',', ', '))  # todo: maybe 1) use untokenize
+                    if 'for' in tokens:  # don't group for list comprehensions
+                        tokens_some_grouped.extend( tokens[start:nr+1] )
+                    else:
+                        tokens_some_grouped.append( ''.join(tokens[start:nr+1]).replace(',', ', '))  # todo: maybe 1) use untokenize
                     start = None
             return tokens_some_grouped
         tokens = group_by_parentheses_one_level()
@@ -50,16 +53,17 @@ def hints_by_token_comparison(input, expected , limit_hints=2, **tokens_kwargs):
     :param limit_hints: max number of hints per category (missing/unnecessary)
     :return:
     """
+    msgs = []
     a_tokens = get_tokens(input, **tokens_kwargs)
     b_tokens = get_tokens(expected, **tokens_kwargs)
     if a_tokens == b_tokens:
         msgs = [  "seems OK, maybe spacing is mangled.." ]
 
-
-    a = Counter( a_tokens )
-    b = Counter( b_tokens )
-    if a == b:
-        msgs =[ "Ordering or spacing is incorrect" ]
+    else:
+        a = Counter( a_tokens )
+        b = Counter( b_tokens )
+        if a == b:
+            msgs =[ "Ordering is incorrect" ]
 
     unnecessary= a - b
     missing  = b - a
@@ -74,8 +78,8 @@ def hints_by_token_comparison(input, expected , limit_hints=2, **tokens_kwargs):
         missing = missing[:limit_hints]
         unnecessary = unnecessary[:limit_hints]
 
-    msgs = messages_by_fragments(input, required=missing, unnecessary=unnecessary )
-    return msgs
+    msgs_more = messages_by_fragments(input, required=missing, unnecessary=unnecessary )
+    return msgs + msgs_more
 
 def code_highlight(txt):
     return "<span style='color:blue; font-family: monospace;'>%s</span>" % txt
@@ -103,19 +107,25 @@ def messages_by_fragments(placeholder, result=None, unnecessary=[], required=[])
     msgs.append("")
     for item in required:
         if not item in placeholder:
-            msgs .append(  code_highlight(item) + " is needed "  )
+            msgs .append(  code_highlight(item) + " is expected "  )
 
     return msgs
 
 
-def check_placeholder(placeholder, result,  required=[], unnecessary=[], human_nr=None, **hints_kwargs ):
+def check_placeholder(placeholder, expected,  required=[], unnecessary=[], human_nr=None, **hints_kwargs ):
 
-    if placeholder == result:
+    tokens_kwargs = {}
+    a_tokens = get_tokens(placeholder, **tokens_kwargs)
+    b_tokens = get_tokens(expected, **tokens_kwargs)
+    
+    # if placeholder == expected:
+    if a_tokens  == b_tokens:
+        failed( str(a_tokens)+"<br>"+str(b_tokens) )
         passed()
 
     else:
-        # msgs = messages_by_fragments(placeholder, result, unnecessary=unnecessary, required=required)
-        msgs = hints_by_token_comparison(placeholder, result, **hints_kwargs)
+        # msgs = messages_by_fragments(placeholder, expected, unnecessary=unnecessary, required=required)
+        msgs = hints_by_token_comparison(placeholder, expected, **hints_kwargs)
         if human_nr:
             msgs.insert(0, "Placeholder nr. %s:" %(human_nr))
         failed( '<br />'.join(msgs) )
@@ -124,6 +134,15 @@ def check_placeholder(placeholder, result,  required=[], unnecessary=[], human_n
 
 # TEST
 if __name__ == '__main__':
-    # check_placeholder(placeholder='has_money == True', result='has_money', unnecessary=['=='], required='has_money')
+    # check_placeholder(placeholder='has_money == True', expected='has_money', unnecessary=['=='], required='has_money')
     print( hints_by_token_comparison(input='has_money == True', expected='has_money',  limit_hints=5) )
     print( hints_by_token_comparison(input='len(data)>0', expected='data',  limit_hints=5) )
+
+    a = 'sum( a )'
+    b = 'sum(a)'
+    a_tokens = get_tokens(a)
+    b_tokens = get_tokens(b)
+    print ("spaced:   ", a_tokens)
+    print ("no spaces:", b_tokens)
+    print( a_tokens == b_tokens )
+    
