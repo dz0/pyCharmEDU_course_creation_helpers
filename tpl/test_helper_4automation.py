@@ -2,15 +2,21 @@ import sys
 from test_helper import run_common_tests, failed, passed, get_answer_placeholders
 
 # https://docs.python.org/3/library/tokenize.html
-from tokenize import tokenize, untokenize, NUMBER, STRING, NAME, OP
+from tokenize import tokenize, untokenize, NUMBER, STRING, NAME, OP, TokenError
 from io import BytesIO
 from collections import Counter
 import random
 
 def get_tokens(code, filter_spaces=True, group_by_parentheses_one_level=True):
-    g = tokenize(BytesIO(code.encode('utf-8')).readline)  # tokenize the string
-    tokens = [tokval for toknum, tokval, _, _, _ in g][1:]
-
+    try:
+        g = tokenize(BytesIO(code.encode('utf-8')).readline)  # tokenize the string
+        tokens = [tokval for toknum, tokval, _, _, _ in g][1:]
+        # failed( tokens)
+    except TokenError as e:
+        failed("ERR %r <br>  in get_tokens(%r, ...)" %(e, code))
+   
+    
+    
     if group_by_parentheses_one_level:
         def group_by_parentheses_one_level():
             start = None
@@ -120,7 +126,7 @@ def check_placeholder(placeholder, expected,  required=[], unnecessary=[], human
     
     # if placeholder == expected:
     if a_tokens  == b_tokens:
-        failed( str(a_tokens)+"<br>"+str(b_tokens) )
+        # failed( "DBG: "+"<br>"+str(a_tokens)+"<br>"+str(b_tokens) )
         passed()
 
     else:
@@ -145,4 +151,8 @@ if __name__ == '__main__':
     print ("spaced:   ", a_tokens)
     print ("no spaces:", b_tokens)
     print( a_tokens == b_tokens )
+    
+
+    # check_placeholder("]", expected="bla]")
+    check_placeholder("[", expected="[bla")  # ERRR
     

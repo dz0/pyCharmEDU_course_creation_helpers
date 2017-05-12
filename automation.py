@@ -42,6 +42,7 @@ def load_course( path, **kwargs ):
         name = lines.pop(0)
 
         children = placeholders = []
+        student_lines = []
         for nr, line in enumerate(lines):
             if line.strip() == "###GROUP_LINES":
                 line = ""
@@ -51,12 +52,21 @@ def load_course( path, **kwargs ):
                         break
                     line += '\n'+ next
             p = placeholder( line )
+
             if p['match']:
                 placeholders.append( p )
                 lines[nr] = p['result_code']
                 p['line_nr'] = nr
 
-        result_code = '\n'.join( lines )
+                line_4student = lines[nr].replace( p['expected'], p['given'] ) # insert student stuff...
+            else:
+                line_4student = line
+
+            student_lines.append( line_4student )
+
+        result_code  = '\n'.join( lines )
+        student_code = '\n'.join( student_lines )
+
 
         return locals()
 
@@ -68,7 +78,7 @@ def load_course( path, **kwargs ):
         entity = 'placeholder'
         re_placeholder = re.compile(r"###PLACEHOLDER:(.*?)--\>(.+)" , re.DOTALL)
 
-
+        # in **multiline** separate directive from code
         directive_parts = []
         clean_code = []
         for line in code.split('\n'):
@@ -83,7 +93,9 @@ def load_course( path, **kwargs ):
         match = re_placeholder.search(directive)
         # match = re_placeholder.search(code)
         if match:
-            expected, given = match.group(1).strip(), match.group(2).strip()
+            expected, given = match.group(1).strip(), match.group(2).strip() # todo: maybe implement nonstrip option -- for indentation questions
+            if expected=="":  # shortcut when we want to replace all # looks like: ###PLACEHOLDER:-->sth...
+                expected = result_code
             # result_code = re.sub(re_placeholder, "", result_code)  # clear directive from code
             offset_in_line = result_code.find( expected )
             # result_line_OKanswered = result_line.replace( expected, given )
@@ -160,23 +172,35 @@ def render_course_tree( info ):
                     placeholder['human_nr'] = phnr+1
 
                     # placeholder offset and length NEEDED for study_project.xml
+                    def placeholder_offset(lines):
+                        """lines -- task[ 'lines' or 'student_lines' ]"""
+                        lines_before = lines [:  placeholder['line_nr'] ]
+                        lines_before.insert(0, lesson['intro'] )
+                        lines_before.append(  placeholder['result_code'] [ : placeholder['offset_in_line'] ] )
+                        content_before = "\n".join( lines_before )
+                        return len( content_before ) # todo fixme: now only for one placeholder per line
 
-                    lines_before = task['lines'][:  placeholder['line_nr'] ]
-                    lines_before.insert(0, lesson['intro'] )
-                    lines_before.append( placeholder['result_code'] [ : placeholder['offset_in_line'] ] )
-                    content_before = "\n".join( lines_before )
-                    placeholder['offset'] = len( content_before )
-                    placeholder['length'] = len( placeholder['given'] )
+
+                    placeholder['offset'] = placeholder_offset( task['lines'] )
+                    placeholder['length'] = len(placeholder['given'])
+
+                    placeholder['student_offset'] = placeholder_offset( task['student_lines'] )
+
+                    # placeholder['student_length'] = len(placeholder['given'])
 
                     print ( ' -> '.join( map(str,   [ lesson.get('name'), task.get('name'), placeholder.get('given') ] )))
 
 
                 dirpath = path = os.path.join("lesson%s" % lesson['nr'],
-
                                               "task%s" % task['nr']   )
                 tests_content = render_with_children( task , templates=tests_tpls  )
-                save('tests.py', tests_content , dirpath=dirpath )
-                save('task.py', lesson['intro']+"\n"+task['result_code'] , dirpath=dirpath )
+                # for creator
+                save('tests.py', tests_content , dirpath='creator/'+dirpath )
+                save('task.py', lesson['intro']+"\n"+task['result_code'] , dirpath='creator/'+dirpath )
+                # for student
+                save('tests.py', tests_content , dirpath='student/'+dirpath )
+                task_student_code = task['student_code']
+                save('task.py', lesson['intro']+"\n"+task_student_code , dirpath='student/'+dirpath )
 
 
 def load_templates(target):
@@ -189,28 +213,61 @@ def load_templates(target):
 
     return templates
 
-if __name__ == "__main__":
-    info = load_course( "src/idioms" )
+
+def study_project_convert_creator2student():
+    stuff = open(RESULT_ROOT+'/creator'+'/study_project.xml').read()
+
+    for lesson in course['children']:
+        for task in lesson['children']:
+            if len(task['children'])>1:  # if more than 1 placeholder -- the offsets for student might change
+                for ph in task['children']:
+                    # print ("PH offsets:", ph['nr'], ph['offset'] , ph['student_offset'])
+                    ph_content_creator = render_with_children(ph, study_project_templates, study_project_decorator)
+                    ph['offset'] = ph['student_offset']  # override for student
+                    ph_content_student = render_with_children(ph, study_project_templates, study_project_decorator)
+                    stuff = stuff.replace(ph_content_creator, ph_content_student)
+
+    stuff = stuff.replace( '<option name="courseMode" value="Course Creator" />',
+                           '<option name="courseMode" value="Study" />' )
+
+    stuff = stuff.replace( '<option name="useLength" value="false" />',
+                           '<option name="useLength" value="true" />')
+    save('student/study_project.xml', stuff)
+
+def _main():
+    global  course
+    course = info = load_course("src/idioms")
     from pprint import pprint
-    pprint( info )
+    pprint(info)
 
     # TEST course files tree rendering: task.py , test.py
+    global tests_tpls
     tests_tpls = load_templates('tests.py')
 
-    render_course_tree( info )
+    render_course_tree(info)
 
     # TEST study_project rendering
+    global study_project_templates
     study_project_templates = load_templates('study_project.xml')
     # study_project_templates = {}
     # for fname in os.listdir('tpl/study_project.xml'):
     #     if fname.endswith(".xml"):
     #         study_project_templates[fname[:-4]] = Template(open(os.path.join("tpl/study_project", fname)).read())
 
+    content = render_with_children(info, study_project_templates, study_project_decorator)
+    save("study_project.xml", content, dirpath='creator/')
 
-    content = render_with_children( info, study_project_templates, study_project_decorator )
-    save("study_project.xml", content)
+    possibly_unsubstituted = re.findall(r"\$\w+" , content)  # check for sake of carefullness
+    print("== possibly_unsubstituted ==")
+    print(set(possibly_unsubstituted) )
+
+    study_project_convert_creator2student()
+
 
 
     # TODO move files to new place...
     print("OK")
-    
+
+
+if __name__ == "__main__":
+    _main()

@@ -35,8 +35,8 @@ $rendered_children
                                     
                                   </list>
                                 </option>
-                                <option name="highlightErrors" value="true" />
-                                <option name="index" value="1" />
+                                <option name="highlightErrors" value="false" />
+                                <option name="index" value="0" />  <!--  TaskFile index ? -->
                                 <option name="trackChanges" value="true" />
                                 <option name="trackLengths" value="true" />
                                 <option name="userCreated" value="false" />

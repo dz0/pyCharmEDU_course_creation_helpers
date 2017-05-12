@@ -20,7 +20,7 @@
                                                 <option name="placeholderText" value="$given" />  <!--text-->
                                                 <option name="possibleAnswer" value="$expected" />  <!--answer-->
                                                 <option name="selected" value="false" />
-                                                <option name="status" value="Failed" />
+                                                <option name="status" value="Unchecked" />
                                               </AnswerPlaceholderSubtaskInfo>
                                             </value>
                                           </entry>
