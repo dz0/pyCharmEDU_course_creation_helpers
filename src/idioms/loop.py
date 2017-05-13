@@ -21,8 +21,9 @@ total = sum( finances )  ###PLACEHOLDER:
 ###sum( finances ) --> 0
 ###for x in finances: 
 ###   total += x
-###GROUP_LINES_END
+
 print( "total", total )
+print('a')
 
 ###TASK: list comprehension: construct new list - modify elements
 ###GROUP_LINES

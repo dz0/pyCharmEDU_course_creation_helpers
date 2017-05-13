@@ -46,7 +46,7 @@ def load_course( path, **kwargs ):
         for nr, line in enumerate(lines):
             if line.strip() == "###GROUP_LINES":
                 line = ""
-                while True:
+                while nr < len(lines)-1:
                     next = lines.pop(nr+1)
                     if next.strip() == "###GROUP_LINES_END":
                         break
@@ -85,7 +85,7 @@ def load_course( path, **kwargs ):
            if '###' in line:
                line, directive_part = line.split("###", 1)
                directive_parts.append( directive_part.rstrip() )
-               clean_code.append( line.rstrip() )
+           clean_code.append( line.rstrip() )
         directive = "###" + '\n'.join(directive_parts)
         result_code = "\n".join(clean_code)
 
