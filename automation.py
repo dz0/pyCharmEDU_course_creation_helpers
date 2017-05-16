@@ -21,6 +21,7 @@ def load_course( path, **kwargs ):
         files = os.listdir(path)
         files = [os.path.join( path, f ) for f in files]
         files = [f  for f in files if os.path.isfile(f) and f.endswith('.py') ]
+        files.sort()
         children = lessons = map(lesson, files)
         return locals()
 
@@ -30,7 +31,8 @@ def load_course( path, **kwargs ):
         name = name.replace("_", " ").title()
         code = open(path).read()
 
-        task_codes = code.split("###TASK:")
+        # task_codes = code.split("###TASK:")
+        task_codes = re.split(r"###TASK:?", code)
         intro = task_codes.pop(0)
 
         children = tasks = map(task, task_codes)
@@ -76,7 +78,7 @@ def load_course( path, **kwargs ):
     def placeholder(code):
         """analyze code for placeholder directive"""
         entity = 'placeholder'
-        re_placeholder = re.compile(r"###PLACEHOLDER:(.*?)--\>(.+)" , re.DOTALL)
+        re_placeholder = re.compile(r"###PLACEHOLDER:?(.*?)--\>(.+)" , re.DOTALL)
 
         # in **multiline** separate directive from code
         directive_parts = []
@@ -94,6 +96,7 @@ def load_course( path, **kwargs ):
         # match = re_placeholder.search(code)
         if match:
             expected, given = match.group(1).strip(), match.group(2).strip() # todo: maybe implement nonstrip option -- for indentation questions
+            # given = " " + given + " "  # surround by spaces -- for easier manipulation...
             if expected=="":  # shortcut when we want to replace all # looks like: ###PLACEHOLDER:-->sth...
                 expected = result_code
             # result_code = re.sub(re_placeholder, "", result_code)  # clear directive from code
@@ -236,7 +239,7 @@ def study_project_convert_creator2student():
 
 def _main():
     global  course
-    course = info = load_course("src/idioms")
+    course = info = load_course("src/intro")
     from pprint import pprint
     pprint(info)
 

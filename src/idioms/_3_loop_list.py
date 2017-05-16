@@ -23,7 +23,6 @@ total = sum( finances )  ###PLACEHOLDER:
 ###   total += x
 
 print( "total", total )
-print('a')
 
 ###TASK: list comprehension: construct new list - modify elements
 ###GROUP_LINES
@@ -44,5 +43,14 @@ profits = [x for x in finances if x > 0]   ###PLACEHOLDER: [x for x in finances 
 
 print( "profits", profits ) 
 
+###TASK: Parallel lists 
 
+income = [100, 50, 777]
+expenses = [90, 55, 762]
 
+###GROUP_LINES
+###PLACEHOLDER: --> n = len( income )
+for in_, out in zip(income, expenses): ###for i in range(n):
+    ###    in_, out = income[i], expenses[i]
+###GROUP_LINES_END    
+    print( "balance: ", in_-out ) 
